@@ -11,7 +11,7 @@ import static pl.gdela.sandbox.web.client.Data.readResponseBodyFrom;
 import static pl.gdela.sandbox.web.client.Data.writeRequestBodyTo;
 
 /**
- * Client written using low-level HttpURLConnection.
+ * TypicalClient written using low-level HttpURLConnection.
  */
 public class RawClient {
 

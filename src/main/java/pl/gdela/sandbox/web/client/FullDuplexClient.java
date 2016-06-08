@@ -13,7 +13,7 @@ import static pl.gdela.sandbox.web.client.Data.readResponseBodyFrom;
 import static pl.gdela.sandbox.web.client.Data.writeRequestBodyTo;
 
 /**
- * Client written using Jetty HttpClient.
+ * TypicalClient written using Jetty HttpClient with correct handling of full duplex communication.
  */
 public class FullDuplexClient {
     public static void main(String[] args) throws Exception {
@@ -24,13 +24,13 @@ public class FullDuplexClient {
         final OutputStreamContentProvider contentProvider = new OutputStreamContentProvider();
         InputStreamResponseListener responseListener = new InputStreamResponseListener();
 
-        request.content(contentProvider).method(HttpMethod.POST).send(responseListener); //async request
+        request.content(contentProvider).method(HttpMethod.POST).send(responseListener); // async request
         httpClient.getExecutor().execute(new Runnable() {
             public void run() {
                 try (OutputStream outputStream = contentProvider.getOutputStream()) {
-                    writeRequestBodyTo(outputStream); //writing to stream in another thread
+                    writeRequestBodyTo(outputStream); // writing to stream in another thread
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    throw new RuntimeException(e);
                 }
             }
         });

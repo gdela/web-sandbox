@@ -17,9 +17,9 @@ import static pl.gdela.sandbox.web.client.Data.readResponseBodyFrom;
 import static pl.gdela.sandbox.web.client.Data.writeRequestBodyTo;
 
 /**
- * Client written using Apache HttpClient.
+ * TypicalClient written using Apache HttpClient without special support for full duplex communication.
  */
-public class Client {
+public class TypicalClient {
     public static void main(String[] args) throws Exception {
         HttpClient client = HttpClientBuilder.create().build();
         HttpPost post = new HttpPost("http://localhost:8080/line-lengths");
